@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: college-management
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn college_management_system.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: college_management_system.production_settings
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SECRET_KEY
+        sync: false
